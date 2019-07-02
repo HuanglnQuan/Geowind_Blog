@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--配置-->
+<configuration>
+    <!--属性-->
+    <!--<properties></properties>-->
+    <!--设置-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
+    <!--类型命名-->
+    <typeAliases>
+        <package name="com.GroupA.Blog.entity"/>
+    </typeAliases>
+    <!--类型处理器-->
+    <!--<typeHandlers></typeHandlers>-->
+    <!--对象工厂-->
+    <!--<objectFactory type=""/>-->
+    <!--插件-->
+    <plugins>
+        <plugin interceptor="tk.mybatis.mapper.mapperhelper.MapperInterceptor">
+            <!--主键自增回写方法,默认值MYSQL,详细说明请看文档HSQLDB-->
+            <property name="IDENTITY" value="MYSQL"/>
+
+            <!--可选参数一共3个，对应0,1,2,分别为SequenceName，ColumnName,PropertyName-->
+            <property name="seqFormat" value="{0}.nextval"/>
+
+            <!--通用Mapper接口，多个通用接口用逗号隔开-->
+            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+        </plugin>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <!--配置分页合理化，跳转页数超过最后一页则跳到最后一页-->
+            <property name="reasonable" value="true"/>
+        </plugin>
+    </plugins>
+    <!--配置环境-->
+    <!--<environments default="default">
+        &lt;!&ndash;环境变量&ndash;&gt;
+        <environment id="default">
+            &lt;!&ndash;事务管理器&ndash;&gt;
+            <transactionManager type="jdbc"/>
+            &lt;!&ndash;数据源&ndash;&gt;
+            <dataSource type="pooled">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>-->
+    <!--数据库厂商标识-->
+    <!--<databaseIdProvider type=""/>-->
+    <!--映射器-->
+    <!--<mappers></mappers>-->
+</configuration>
